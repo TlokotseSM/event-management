@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'event_retention_days' => env('EVENT_RETENTION_DAYS', 30),
+
 ];
