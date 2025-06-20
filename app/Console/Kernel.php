@@ -12,6 +12,12 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\CleanupPastEvents::class,
     ];
 
+    protected $middleware = [
+    \Illuminate\Http\Middleware\HandleCors::class, 
+    \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
+    // ... other middleware
+    ];
+
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('send:event-reminders')

@@ -19,4 +19,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/test-cors', function() {
+    return response()->json(['message' => 'CORS is working!']);
+});
+
+Route::get('/test-cors', function() {
+    return response()->json([
+        'message' => 'CORS test successful',
+        'data' => [
+            'cors_configured' => true,
+            'api_status' => 'working'
+        ]
+    ]);
+});
 });
