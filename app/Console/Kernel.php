@@ -2,11 +2,29 @@
 
 namespace App\Console;
 
-protected function schedule(Schedule $schedule)
-{
-    $schedule->command('send:event-reminders')
-             ->dailyAt('09:00');
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-    $schedule->command('cleanup:past-events')
-             ->daily();
+class Kernel extends ConsoleKernel
+{
+    protected $commands = [
+        \App\Console\Commands\SendEventReminders::class,
+        \App\Console\Commands\CleanupPastEvents::class,
+    ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('send:event-reminders')
+                 ->dailyAt('09:00');
+
+        $schedule->command('cleanup:past-events')
+                 ->daily();
+    }
+
+    protected function commands()
+    {
+        $this->load(__DIR__.'/Commands');
+
+        require base_path('routes/console.php');
+    }
 }
