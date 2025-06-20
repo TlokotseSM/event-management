@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Event;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class CleanupPastEvents extends Command
 {
@@ -43,13 +44,13 @@ class CleanupPastEvents extends Command
             $this->info("Successfully deleted {$deletedCount} past events.");
             Log::info("Deleted {$deletedCount} past events older than {$cutoffDate}");
 
-            return Command::SUCCESS;
+            return SymfonyCommand::SUCCESS;
 
         } catch (\Exception $e) {
             $this->error("Error cleaning up past events: " . $e->getMessage());
             Log::error("Failed to clean up past events: " . $e->getMessage());
 
-            return Command::FAILURE;
+            return SymfonyCommand::FAILURE;
         }
     }
 }
