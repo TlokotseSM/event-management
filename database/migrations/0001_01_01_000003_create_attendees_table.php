@@ -12,7 +12,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->string('status')->default('registered'); // Add this line
+            $table->timestamp('attended_at')->nullable();   // Optional: for tracking attendance
             $table->timestamps();
+
+            $table->unique(['user_id', 'event_id']); // Prevent duplicate registrations
         });
     }
 
